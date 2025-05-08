@@ -114,19 +114,41 @@ int main()
     setlocale(LC_ALL, "portuguese");
 	
 	 
-	int opcao=0; //Definição de variáveis
-	int laco=1;
-	char senhadigitada[10]="a";
-	
-		 printf("### Cartório da EBAC ### \n\n");
-	     printf("Login de Administrador\n\nDigite sua senha: ");
-	     scanf("%s",senhadigitada);
-	     
-	    if(strcmp(senhadigitada,"admin")==0)
-	    {
-		
-	  
-	     while(1)	
+    int opcao = 0;
+    char senha[10];
+    char confirmasenha[10];
+    int tentativas = 3; // Número máximo de tentativas
+
+    printf("### Cartório da EBAC ### \n\n");
+    
+        while (tentativas > 0) {
+        printf("Login de Administrador\n\nDigite sua senha: ");
+        scanf("%s", senha);
+        
+        // Verifica se a senha está correta
+        if (strcmp(senha, "admin") == 0) 
+		{
+            printf("Digite novamente a senha para confirmar: ");
+            scanf("%s", confirmasenha);
+            
+            if (strcmp(senha, confirmasenha) == 0) {
+                printf("\nAcesso concedido!\n");
+                break;
+            } else {
+                printf("\nAs senhas não correspondem. Tente novamente.\n\n");
+            }
+        } else {
+            printf("\nSenha incorreta. Tente novamente.\n\n");
+        }
+        
+        tentativas--;
+        
+        if (tentativas == 0) {
+            printf("Você excedeu o número máximo de tentativas. Encerrando o programa.\n");
+            return 0;
+        }
+    }
+    
 	{
 	
 	    system("cls");
@@ -175,9 +197,10 @@ int main()
       }
       
     }
-      else 
-      printf("Senha incorreta!");
-}
+      
+      
+    
+
    
 
 
